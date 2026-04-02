@@ -47,7 +47,6 @@ public class UWBDistancaPublisher : MonoBehaviour
                 float distance = Vector3.Distance(transform.position, beacon.transform.position) + GaussRandom(mu, sigma);
 
                 UWB_distanceMsg msg = new UWB_distanceMsg((sbyte)(i+1), distance);
-                Debug.Log(msg);
                 //ros.Publish(topicName, msg);
             }
 
