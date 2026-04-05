@@ -1,12 +1,52 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CollisionDetect : MonoBehaviour
 {
 
     [SerializeField] GameObject groundPlane;
+    [SerializeField] float rangeFinderDistance = 15.0f;
 
     private Rigidbody rb;
+
+    private class Sensor
+    {
+        public Vector3 direction;
+        public LineRenderer line;
+    }
+
+    private Sensor[] sensors;
+
+    private void Awake()
+    {
+        sensors = new Sensor[4];
+        for (int i = 0; i < sensors.Length; i++)
+            sensors[i] = new Sensor();
+    }
+
+    private void HandleRangeSensors(Vector3 start, Sensor sensor)
+    {
+        if (sensor == null) return;
+        if (sensor.line == null) return;
+
+        RaycastHit hit;
+
+        Vector3 dir = transform.TransformDirection(sensor.direction);
+        start = start + dir * 2.0f;
+        
+
+        if (Physics.Raycast(start, dir, out hit, rangeFinderDistance))
+        {
+            sensor.line.SetPosition(0, transform.position);
+            sensor.line.SetPosition(1, hit.point);
+            sensor.line.enabled = true;
+        }
+        else
+        {
+            sensor.line.enabled = false;
+        }
+    }
 
 
     void OnCollisionEnter(Collision collision)
@@ -32,15 +72,58 @@ public class CollisionDetect : MonoBehaviour
             Debug.Break();
         }
     }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Vector3[] dirs = new Vector3[]
+        {
+            Vector3.forward,
+            Vector3.back,
+            Vector3.right,
+            Vector3.left
+        };
+
         rb = GetComponent<Rigidbody>();
+
+
+        for (int i = 0; i < dirs.Length; i++) 
+        {
+            sensors[i] = new Sensor();
+            sensors[i].direction = dirs[i];
+
+            // Create GameObject
+            GameObject obj = new GameObject("Sensor_" + i);
+            obj.transform.parent = transform;
+            obj.transform.localPosition = Vector3.zero;
+            obj.transform.localRotation = Quaternion.identity;
+
+            LineRenderer lr = obj.AddComponent<LineRenderer>();
+            if (lr == null)
+            {
+                Debug.LogError("Failed to add LineRenderer to Sensor_" + i);
+                continue;
+            }
+            lr.material = new Material(Shader.Find("Sprites/Default"));
+            lr.startColor = Color.red;
+            lr.startWidth = 0.1f;
+            lr.positionCount = 2;
+
+            sensors[i].line = lr;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void FixedUpdate()
+    {
+        foreach (Sensor s in sensors)
+        {
+            HandleRangeSensors(transform.position, s);
+        }
     }
 }
