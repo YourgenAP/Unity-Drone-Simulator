@@ -7,8 +7,14 @@ public class CollisionDetect : MonoBehaviour
 
     [SerializeField] GameObject groundPlane;
     [SerializeField] float rangeFinderDistance = 15.0f;
+    [SerializeField] float minimalAllowedDistance = 5.0f;
+
+    [SerializeField] float sensorBias = 0.0f;
+    [SerializeField] float sensorStdDeviation = 0.05f;
 
     private Rigidbody rb;
+
+    private Helpers helper = new Helpers();
 
     private class Sensor
     {
@@ -25,10 +31,10 @@ public class CollisionDetect : MonoBehaviour
             sensors[i] = new Sensor();
     }
 
-    private void HandleRangeSensors(Vector3 start, Sensor sensor)
+    private float HandleRangeSensors(Vector3 start, Sensor sensor)
     {
-        if (sensor == null) return;
-        if (sensor.line == null) return;
+        if (sensor == null) return Mathf.Infinity;
+        if (sensor.line == null) return Mathf.Infinity;
 
         RaycastHit hit;
 
@@ -41,11 +47,14 @@ public class CollisionDetect : MonoBehaviour
             sensor.line.SetPosition(0, transform.position);
             sensor.line.SetPosition(1, hit.point);
             sensor.line.enabled = true;
+            float error = helper.GaussRandom(sensorBias, sensorStdDeviation);
+            return hit.distance + error;
         }
         else
         {
             sensor.line.enabled = false;
         }
+        return Mathf.Infinity;
     }
 
 
@@ -123,7 +132,12 @@ public class CollisionDetect : MonoBehaviour
     {
         foreach (Sensor s in sensors)
         {
-            HandleRangeSensors(transform.position, s);
+            float range = HandleRangeSensors(transform.position, s);
+            Debug.Log(range);
+            if (range <= minimalAllowedDistance)
+            {
+                transform.position -= transform.TransformDirection(s.direction) * Time.deltaTime;
+            }
         }
     }
 }
