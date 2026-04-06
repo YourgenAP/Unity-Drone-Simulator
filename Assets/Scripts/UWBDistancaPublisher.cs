@@ -11,21 +11,12 @@ public class UWBDistancaPublisher : MonoBehaviour
     // The game object
     public GameObject[] Beacons;
     [SerializeField] public float publishMessageFrequency = 0.5f;
-    [SerializeField] private float mu = 0.0f;
-    [SerializeField] private float sigma = 0.05f;
+    [SerializeField] private float beaconBias = 0.0f;
+    [SerializeField] private float beaconStdDeviation = 0.05f;
 
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed = 0.0f;
-
-    private float GaussRandom(float mu, float sigma)
-    {
-        float x1 = UnityEngine.Random.Range(0.0f, 1.0f);
-        float x2 = UnityEngine.Random.Range(0.0f, 1.0f);
-
-        float y1 = (float)(Math.Sqrt(-2.0 * Math.Log(x1)) * Math.Cos(2.0f * Math.PI * x2) * sigma + mu);
-        return y1;
-    }
-
+    private Helpers helper = new Helpers();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,7 +35,7 @@ public class UWBDistancaPublisher : MonoBehaviour
             for (int i = 0; i < Beacons.Length; i++)
             {
                 GameObject beacon = Beacons[i];
-                float distance = Vector3.Distance(transform.position, beacon.transform.position) + GaussRandom(mu, sigma);
+                float distance = Vector3.Distance(transform.position, beacon.transform.position) + helper.GaussRandom(beaconBias, beaconStdDeviation);
 
                 UWB_distanceMsg msg = new UWB_distanceMsg((sbyte)(i+1), distance);
                 //ros.Publish(topicName, msg);
