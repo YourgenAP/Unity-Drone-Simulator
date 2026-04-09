@@ -61,11 +61,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.11f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\RosMessages\Scripts\msg\TakeoffMsg.cs" />
     <Compile Include="Assets\Scripts\MotionScript.cs" />
     <Compile Include="Assets\RosMessages\Scripts\msg\UWB_distanceMsg.cs" />
     <Compile Include="Assets\Scripts\UWBDistancaPublisher.cs" />
+    <Compile Include="Assets\Scripts\Helpers.cs" />
+    <Compile Include="Assets\RosMessages\Scripts\msg\Fly_velocityMsg.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\CollisionDetect.cs" />
+    <Compile Include="Assets\RosMessages\Scripts\msg\Range_sensorMsg.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
