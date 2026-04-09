@@ -1303,8 +1303,8 @@ MonoBehaviour:
   - {fileID: 491311559}
   - {fileID: 1833596935}
   publishMessageFrequency: 0.5
-  mu: 0
-  sigma: 1.18
+  beaconBias: 0
+  beaconStdDeviation: 0.05
 --- !u!65 &843710972
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1366,6 +1366,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   groundPlane: {fileID: 1508100681}
+  rangeFinderDistance: 15
+  minimalAllowedDistance: 5
+  sensorBias: 0
+  sensorStdDeviation: 0.05
 --- !u!1 &1161085884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,10 +1719,10 @@ PrefabInstance:
       addedObject: {fileID: 843710969}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 843710972}
+      addedObject: {fileID: 843710974}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 843710974}
+      addedObject: {fileID: 843710972}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 843710973}

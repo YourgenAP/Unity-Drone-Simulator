@@ -1,4 +1,6 @@
+using RosMessageTypes.Scripts;
 using System.Collections;
+using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,10 +16,14 @@ public class CollisionDetect : MonoBehaviour
 
     private Rigidbody rb;
 
-    private Helpers helper = new Helpers();
+    private Helpers helper = new();
+
+    ROSConnection ros;
+    public string topicName = "range_sensor";
 
     private class Sensor
     {
+        public int id;
         public Vector3 direction;
         public LineRenderer line;
     }
@@ -36,13 +42,12 @@ public class CollisionDetect : MonoBehaviour
         if (sensor == null) return Mathf.Infinity;
         if (sensor.line == null) return Mathf.Infinity;
 
-        RaycastHit hit;
 
         Vector3 dir = transform.TransformDirection(sensor.direction);
         start = start + dir * 2.0f;
         
 
-        if (Physics.Raycast(start, dir, out hit, rangeFinderDistance))
+        if (Physics.Raycast(start, dir, out RaycastHit hit, rangeFinderDistance))
         {
             sensor.line.SetPosition(0, transform.position);
             sensor.line.SetPosition(1, hit.point);
@@ -96,13 +101,19 @@ public class CollisionDetect : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
 
+        ros = ROSConnection.GetOrCreateInstance();
+        ros.RegisterPublisher<Range_sensorMsg>(topicName);
+
         for (int i = 0; i < dirs.Length; i++) 
         {
-            sensors[i] = new Sensor();
-            sensors[i].direction = dirs[i];
+            sensors[i] = new Sensor
+            {
+                id = i + 1,
+                direction = dirs[i]
+            };
 
             // Create GameObject
-            GameObject obj = new GameObject("Sensor_" + i);
+            GameObject obj = new("Sensor_" + i);
             obj.transform.parent = transform;
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
@@ -133,7 +144,11 @@ public class CollisionDetect : MonoBehaviour
         foreach (Sensor s in sensors)
         {
             float range = HandleRangeSensors(transform.position, s);
-            Debug.Log(range);
+            if (range <= rangeFinderDistance)
+            {
+                Range_sensorMsg msg = new Range_sensorMsg((sbyte)(s.id), range);
+                //ros.Publish(topicName, msg)
+            }
             if (range <= minimalAllowedDistance)
             {
                 transform.position -= transform.TransformDirection(s.direction) * Time.deltaTime;

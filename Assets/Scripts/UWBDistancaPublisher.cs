@@ -22,7 +22,7 @@ public class UWBDistancaPublisher : MonoBehaviour
     void Start()
     {
         ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<UWB_distanceMsg>(topicName);
+        ros.RegisterPublisher<Uwb_distanceMsg>(topicName);
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class UWBDistancaPublisher : MonoBehaviour
                 GameObject beacon = Beacons[i];
                 float distance = Vector3.Distance(transform.position, beacon.transform.position) + helper.GaussRandom(beaconBias, beaconStdDeviation);
 
-                UWB_distanceMsg msg = new UWB_distanceMsg((sbyte)(i+1), distance);
+                Uwb_distanceMsg msg = new Uwb_distanceMsg((sbyte)(i+1), distance);
                 //ros.Publish(topicName, msg);
             }
 
