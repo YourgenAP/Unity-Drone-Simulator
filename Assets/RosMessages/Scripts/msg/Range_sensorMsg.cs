@@ -8,44 +8,44 @@ using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 namespace RosMessageTypes.Scripts
 {
     [Serializable]
-    public class Uwb_distanceMsg : Message
+    public class Range_sensorMsg : Message
     {
-        public const string k_RosMessageName = "Scripts/uwb_distance";
+        public const string k_RosMessageName = "Scripts/range_sensor";
         public override string RosMessageName => k_RosMessageName;
 
-        public sbyte beacon_id;
+        public sbyte sensor_id;
         public float range;
 
-        public Uwb_distanceMsg()
+        public Range_sensorMsg()
         {
-            this.beacon_id = 0;
+            this.sensor_id = 0;
             this.range = 0.0f;
         }
 
-        public Uwb_distanceMsg(sbyte beacon_id, float range)
+        public Range_sensorMsg(sbyte sensor_id, float range)
         {
-            this.beacon_id = beacon_id;
+            this.sensor_id = sensor_id;
             this.range = range;
         }
 
-        public static Uwb_distanceMsg Deserialize(MessageDeserializer deserializer) => new Uwb_distanceMsg(deserializer);
+        public static Range_sensorMsg Deserialize(MessageDeserializer deserializer) => new Range_sensorMsg(deserializer);
 
-        private Uwb_distanceMsg(MessageDeserializer deserializer)
+        private Range_sensorMsg(MessageDeserializer deserializer)
         {
-            deserializer.Read(out this.beacon_id);
+            deserializer.Read(out this.sensor_id);
             deserializer.Read(out this.range);
         }
 
         public override void SerializeTo(MessageSerializer serializer)
         {
-            serializer.Write(this.beacon_id);
+            serializer.Write(this.sensor_id);
             serializer.Write(this.range);
         }
 
         public override string ToString()
         {
-            return "Uwb_distanceMsg: " +
-            "\nbeacon_id: " + beacon_id.ToString() +
+            return "Range_sensorMsg: " +
+            "\nsensor_id: " + sensor_id.ToString() +
             "\nrange: " + range.ToString();
         }
 
