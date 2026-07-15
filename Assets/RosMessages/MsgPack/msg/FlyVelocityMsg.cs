@@ -5,35 +5,35 @@ using System.Collections.Generic;
 using System.Text;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 
-namespace RosMessageTypes.Scripts
+namespace RosMessageTypes.MsgPack
 {
     [Serializable]
-    public class Fly_velocityMsg : Message
+    public class FlyVelocityMsg : Message
     {
-        public const string k_RosMessageName = "Scripts/fly_velocity";
+        public const string k_RosMessageName = "msg_pack/FlyVelocity";
         public override string RosMessageName => k_RosMessageName;
 
         public float v_x;
         public float v_y;
         public float v_z;
 
-        public Fly_velocityMsg()
+        public FlyVelocityMsg()
         {
             this.v_x = 0.0f;
             this.v_y = 0.0f;
             this.v_z = 0.0f;
         }
 
-        public Fly_velocityMsg(float v_x, float v_y, float v_z)
+        public FlyVelocityMsg(float v_x, float v_y, float v_z)
         {
             this.v_x = v_x;
             this.v_y = v_y;
             this.v_z = v_z;
         }
 
-        public static Fly_velocityMsg Deserialize(MessageDeserializer deserializer) => new Fly_velocityMsg(deserializer);
+        public static FlyVelocityMsg Deserialize(MessageDeserializer deserializer) => new FlyVelocityMsg(deserializer);
 
-        private Fly_velocityMsg(MessageDeserializer deserializer)
+        private FlyVelocityMsg(MessageDeserializer deserializer)
         {
             deserializer.Read(out this.v_x);
             deserializer.Read(out this.v_y);
@@ -49,7 +49,7 @@ namespace RosMessageTypes.Scripts
 
         public override string ToString()
         {
-            return "Fly_velocityMsg: " +
+            return "FlyVelocityMsg: " +
             "\nv_x: " + v_x.ToString() +
             "\nv_y: " + v_y.ToString() +
             "\nv_z: " + v_z.ToString();

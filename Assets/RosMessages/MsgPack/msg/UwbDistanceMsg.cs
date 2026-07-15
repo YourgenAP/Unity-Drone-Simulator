@@ -5,32 +5,32 @@ using System.Collections.Generic;
 using System.Text;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 
-namespace RosMessageTypes.Scripts
+namespace RosMessageTypes.MsgPack
 {
     [Serializable]
-    public class Uwb_distanceMsg : Message
+    public class UwbDistanceMsg : Message
     {
-        public const string k_RosMessageName = "Scripts/uwb_distance";
+        public const string k_RosMessageName = "msg_pack/UwbDistance";
         public override string RosMessageName => k_RosMessageName;
 
         public sbyte beacon_id;
         public float range;
 
-        public Uwb_distanceMsg()
+        public UwbDistanceMsg()
         {
             this.beacon_id = 0;
             this.range = 0.0f;
         }
 
-        public Uwb_distanceMsg(sbyte beacon_id, float range)
+        public UwbDistanceMsg(sbyte beacon_id, float range)
         {
             this.beacon_id = beacon_id;
             this.range = range;
         }
 
-        public static Uwb_distanceMsg Deserialize(MessageDeserializer deserializer) => new Uwb_distanceMsg(deserializer);
+        public static UwbDistanceMsg Deserialize(MessageDeserializer deserializer) => new UwbDistanceMsg(deserializer);
 
-        private Uwb_distanceMsg(MessageDeserializer deserializer)
+        private UwbDistanceMsg(MessageDeserializer deserializer)
         {
             deserializer.Read(out this.beacon_id);
             deserializer.Read(out this.range);
@@ -44,7 +44,7 @@ namespace RosMessageTypes.Scripts
 
         public override string ToString()
         {
-            return "Uwb_distanceMsg: " +
+            return "UwbDistanceMsg: " +
             "\nbeacon_id: " + beacon_id.ToString() +
             "\nrange: " + range.ToString();
         }

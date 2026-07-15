@@ -1,4 +1,4 @@
-using RosMessageTypes.Scripts;
+using RosMessageTypes.MsgPack;
 using System.Collections;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
@@ -102,7 +102,7 @@ public class CollisionDetect : MonoBehaviour
 
 
         ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<Range_sensorMsg>(topicName);
+        ros.RegisterPublisher<RangeSensorMsg>(topicName);
 
         for (int i = 0; i < dirs.Length; i++) 
         {
@@ -146,13 +146,13 @@ public class CollisionDetect : MonoBehaviour
             float range = HandleRangeSensors(transform.position, s);
             if (range <= rangeFinderDistance)
             {
-                Range_sensorMsg msg = new Range_sensorMsg((sbyte)(s.id), range);
-                //ros.Publish(topicName, msg)
+                RangeSensorMsg msg = new RangeSensorMsg((sbyte)(s.id), range);
+                ros.Publish(topicName, msg);
             }
-            if (range <= minimalAllowedDistance)
-            {
-                transform.position -= transform.TransformDirection(s.direction) * Time.deltaTime;
-            }
+            //if (range <= minimalAllowedDistance)
+            //{
+            //    transform.position -= transform.TransformDirection(s.direction) * Time.deltaTime;
+            //}
         }
     }
 }

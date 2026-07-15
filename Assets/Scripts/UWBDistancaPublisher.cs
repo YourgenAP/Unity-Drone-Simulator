@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
-using RosMessageTypes.Scripts;
+using RosMessageTypes.MsgPack;
 
 public class UWBDistancaPublisher : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class UWBDistancaPublisher : MonoBehaviour
     void Start()
     {
         ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<Uwb_distanceMsg>(topicName);
+        ros.RegisterPublisher<UwbDistanceMsg>(topicName);
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class UWBDistancaPublisher : MonoBehaviour
                 GameObject beacon = Beacons[i];
                 float distance = Vector3.Distance(transform.position, beacon.transform.position) + helper.GaussRandom(beaconBias, beaconStdDeviation);
 
-                Uwb_distanceMsg msg = new Uwb_distanceMsg((sbyte)(i+1), distance);
+                UwbDistanceMsg msg = new UwbDistanceMsg((sbyte)(i+1), distance);
                 //ros.Publish(topicName, msg);
             }
 

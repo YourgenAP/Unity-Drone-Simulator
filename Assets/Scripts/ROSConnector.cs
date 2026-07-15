@@ -6,7 +6,7 @@ using UnityEngine.Windows;
 public class ROSConnector : MonoBehaviour
 {
     [SerializeField] string IPAddress = "127.0.0.1";
-    [SerializeField] int Port = 0;
+    [SerializeField] int Port = 10000;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -1,4 +1,4 @@
-using RosMessageTypes.Scripts;
+using RosMessageTypes.MsgPack;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,7 +12,7 @@ public class MotionScript : MonoBehaviour
     [SerializeField] private float speed = 5f; // Speed of the drone movement
     [SerializeField] private float rotationSpeed = 2f; // Speed of the drone rotation
 
-    private float target_height;
+    private float target_height = 0.0f;
     private float v_x;
     private float v_y;
     private float v_z;
@@ -22,7 +22,7 @@ public class MotionScript : MonoBehaviour
         target_height = msg.height;
     }
 
-    private void FlyVelocityCallback(Fly_velocityMsg msg) {
+    private void FlyVelocityCallback(FlyVelocityMsg msg) {
         v_x = msg.v_x;
         v_y = msg.v_y;
         v_z = msg.v_z;
@@ -33,7 +33,7 @@ public class MotionScript : MonoBehaviour
     {
         ros = ROSConnection.GetOrCreateInstance();
         ros.Subscribe<TakeoffMsg>(takeoffTopicName, TakeoffCallback);
-        ros.Subscribe<Fly_velocityMsg>(flyVelocityTopicName, FlyVelocityCallback);
+        ros.Subscribe<FlyVelocityMsg>(flyVelocityTopicName, FlyVelocityCallback);
     }
 
     // Update is called once per frame
@@ -81,18 +81,16 @@ public class MotionScript : MonoBehaviour
             
             if (drone.transform.position.z != target_height)
             {
-                float diff = target_height - drone.transform.position.z;
+                float diff = target_height - drone.transform.position.y;
                 if (diff > 0)
                 {
                     move += drone.transform.up;
                 }
-                else
-                {
-                    move -= drone.transform.up;
-                }
             }
 
             drone.transform.position += move * Time.deltaTime * speed;
+
+            Debug.Log(move);
 
             move = Vector3.zero;
 
@@ -108,6 +106,8 @@ public class MotionScript : MonoBehaviour
             {
                 move += drone.transform.up * v_z;
             }
+
+            Debug.Log(move);
 
             drone.transform.position += move * Time.deltaTime;
         }

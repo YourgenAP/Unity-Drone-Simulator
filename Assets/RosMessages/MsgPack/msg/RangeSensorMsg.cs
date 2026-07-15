@@ -5,32 +5,32 @@ using System.Collections.Generic;
 using System.Text;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 
-namespace RosMessageTypes.Scripts
+namespace RosMessageTypes.MsgPack
 {
     [Serializable]
-    public class Range_sensorMsg : Message
+    public class RangeSensorMsg : Message
     {
-        public const string k_RosMessageName = "Scripts/range_sensor";
+        public const string k_RosMessageName = "msg_pack/RangeSensor";
         public override string RosMessageName => k_RosMessageName;
 
         public sbyte sensor_id;
         public float range;
 
-        public Range_sensorMsg()
+        public RangeSensorMsg()
         {
             this.sensor_id = 0;
             this.range = 0.0f;
         }
 
-        public Range_sensorMsg(sbyte sensor_id, float range)
+        public RangeSensorMsg(sbyte sensor_id, float range)
         {
             this.sensor_id = sensor_id;
             this.range = range;
         }
 
-        public static Range_sensorMsg Deserialize(MessageDeserializer deserializer) => new Range_sensorMsg(deserializer);
+        public static RangeSensorMsg Deserialize(MessageDeserializer deserializer) => new RangeSensorMsg(deserializer);
 
-        private Range_sensorMsg(MessageDeserializer deserializer)
+        private RangeSensorMsg(MessageDeserializer deserializer)
         {
             deserializer.Read(out this.sensor_id);
             deserializer.Read(out this.range);
@@ -44,7 +44,7 @@ namespace RosMessageTypes.Scripts
 
         public override string ToString()
         {
-            return "Range_sensorMsg: " +
+            return "RangeSensorMsg: " +
             "\nsensor_id: " + sensor_id.ToString() +
             "\nrange: " + range.ToString();
         }

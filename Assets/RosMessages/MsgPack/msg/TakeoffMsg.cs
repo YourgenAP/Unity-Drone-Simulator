@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Text;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 
-namespace RosMessageTypes.Scripts
+namespace RosMessageTypes.MsgPack
 {
     [Serializable]
     public class TakeoffMsg : Message
     {
-        public const string k_RosMessageName = "Scripts/takeoff";
+        public const string k_RosMessageName = "msg_pack/Takeoff";
         public override string RosMessageName => k_RosMessageName;
 
         public float height;

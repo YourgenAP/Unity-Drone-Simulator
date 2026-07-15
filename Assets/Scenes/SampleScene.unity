@@ -1275,6 +1275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710e9ba4900c3d44a955ecfa67d0826d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  takeoffTopicName: takeoff
+  flyVelocityTopicName: fly_velocity
   speed: 5
   rotationSpeed: 25
 --- !u!4 &843710968 stripped
@@ -1370,6 +1372,7 @@ MonoBehaviour:
   minimalAllowedDistance: 5
   sensorBias: 0
   sensorStdDeviation: 0.05
+  topicName: range_sensor
 --- !u!1 &1161085884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,7 +1667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77ec979c4a1053f4fb90fee3d17b240c, type: 3}
       propertyPath: m_LocalPosition.z

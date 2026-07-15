@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1037
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -218,8 +218,8 @@ MonoBehaviour:
     y: 0
     width: 1279
     height: 693
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 226}
+  m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -1084,9 +1084,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -52.412018, y: 37.939102, z: -60.039265}
+    m_Target: {x: 2.9114077, y: 9.54454, z: -96.10404}
     speed: 2
-    m_Value: {x: -52.412018, y: 37.939102, z: -60.039265}
+    m_Value: {x: 2.9114077, y: 9.54454, z: -96.10404}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1132,13 +1132,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.20798683, y: -0.34673128, z: 0.079113595, w: -0.9112112}
+    m_Target: {x: -0.2718805, y: 0.019630574, z: -0.0055694585, w: -0.96214026}
     speed: 2
-    m_Value: {x: -0.20798208, y: -0.34672335, z: 0.079111785, w: -0.91119033}
+    m_Value: {x: -0.27187383, y: 0.019630091, z: -0.0055693216, w: -0.96211666}
   m_Size:
-    m_Target: 7.388608
+    m_Target: 7.6079106
     speed: 2
-    m_Value: 7.388608
+    m_Value: 7.6079106
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1218,6 +1218,7 @@ MonoBehaviour:
         m_Data: 0
       m_ExpandedIDs:
       - m_Data: -1296
+      - m_Data: 46640
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1397,7 +1398,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/RosMessages/Scripts/msg
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1407,26 +1408,28 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/RosMessages/Scripts/msg
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Projects\Hraes\Unity\My project
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
+    scrollPos: {x: 0, y: 180}
     m_SelectedIDs:
-    - m_Data: 47244
+    - m_Data: 48740
     m_LastClickedID:
-      m_Data: 47244
+      m_Data: 48740
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 46926
-    - m_Data: 46928
-    - m_Data: 46930
-    - m_Data: 46932
-    - m_Data: 46934
-    - m_Data: 46936
+    - m_Data: 46950
+    - m_Data: 46952
+    - m_Data: 46954
+    - m_Data: 46956
+    - m_Data: 46958
+    - m_Data: 46960
+    - m_Data: 46962
+    - m_Data: 46964
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -1446,7 +1449,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 10}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -1461,12 +1464,14 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 46926
-    - m_Data: 46928
-    - m_Data: 46930
-    - m_Data: 46932
-    - m_Data: 46934
-    - m_Data: 46936
+    - m_Data: 46950
+    - m_Data: 46952
+    - m_Data: 46954
+    - m_Data: 46956
+    - m_Data: 46958
+    - m_Data: 46960
+    - m_Data: 46962
+    - m_Data: 46964
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
